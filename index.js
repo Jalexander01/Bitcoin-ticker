@@ -18,9 +18,29 @@ app.post("/", function(req, res){
 
 // console.log(req.body.crypto);
 // console.log(req.body.fiat);
-request("https://apiv2.bitcoinaverage.com/indices/global/ticker/BTCUSD", function(error, response, body){
+var crypto = req.body.crypto;
+var fiat = req.body.fiat;
+var baseURL = "https://apiv2.bitcoinaverage.com/indices/global/ticker/";
+finalURL = baseURL + crypto + fiat;
+request (finalURL, function(error, response, body){
   console.log("*****************************");
-  console.log(body);
+  // console.log(body);
+
+  var data = JSON.parse(body);
+  var price = data.last;
+  var dailyAverage = data.averages.day;
+  var weeklyAverage = data.averages.week;
+
+  console.log("price " + price);
+  console.log("*****************************");
+  console.log("Daily average " + dailyAverage);
+  console.log("*****************************");
+  console.log("Weekly average " + weeklyAverage);
+
+  currentDate = data.display_timestamp;
+  res.write("The current time is " +currentDate );
+  res.write("<h1>The current Bitcoin Price is " + price + "</h1>");
+  res.send();
 });
 
 
