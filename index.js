@@ -38,7 +38,7 @@ request (finalURL, function(error, response, body){
   console.log("Weekly average " + weeklyAverage);
 
   currentDate = data.display_timestamp;
-  res.write("The current time is " +currentDate );
+  res.write("<h1>The current time is " +currentDate +"</h1>");
   res.write("<h1>The current Bitcoin Price is " + price + "</h1>");
   res.send();
 });
