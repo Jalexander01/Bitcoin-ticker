@@ -22,23 +22,23 @@ var crypto = req.body.crypto;
 var fiat = req.body.fiat;
 var baseURL = "https://apiv2.bitcoinaverage.com/indices/global/ticker/";
 finalURL = baseURL + crypto + fiat;
-request (finalURL, function(error, response, body){
+request ( "https://blockchain.info/ticker", function(error, response, body){
   console.log("*****************************");
   // console.log(body);
 
   var data = JSON.parse(body);
-  var price = data.last;
-  var dailyAverage = data.averages.day;
-  var weeklyAverage = data.averages.week;
+    var price = data.USD.last;
+  // var dailyAverage = data.averages.day;
+  // var weeklyAverage = data.averages.week;
 
-  console.log("price " + price);
+  console.log("price " + data);
   console.log("*****************************");
-  console.log("Daily average " + dailyAverage);
+  // console.log("Daily average " + dailyAverage);
   console.log("*****************************");
-  console.log("Weekly average " + weeklyAverage);
+  // console.log("Weekly average " + weeklyAverage);
 
-  currentDate = data.display_timestamp;
-  res.write("<h1>The current time is " +currentDate +"</h1>");
+  // currentDate = data.display_timestamp;
+  // res.write("<h1>The current time is " +currentDate +"</h1>");
   res.write("<h1>The current Bitcoin Price is " + price + "</h1>");
   res.send();
 });
