@@ -33,11 +33,16 @@ app.post("/", function(req, res){
 var symbol_set = 'global';
 var symbol = 'BTCUSD';
 
-restClient.getTickerDataPerSymbol('global', 'BTCUSD', function(response) {
+restClient.getTickerDataPerSymbol('global', crypto + fiat, function(response) {
 
    var data = JSON.parse(response);
    var price = data.last;
     console.log(price);
+
+    currentDate = data.display_timestamp;
+      res.write("<h1>The current time is " +currentDate +"</h1>");
+      res.write("<h1>The current " + crypto + " price in " + fiat +" is " + price + "</h1>");
+     res.send();
 
 
 }, function(error){
